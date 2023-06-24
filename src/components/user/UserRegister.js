@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import {addUser} from '../utils/ApiUtilUser'
 
 function UserRegister() {
-
+    const [loader, setLoader] = useState(false)
     const [inputdata, setInputData] = useState({
         Name: "",
         Email: "",
@@ -57,15 +57,18 @@ function UserRegister() {
             toast.error("password is not Matching")
         }
         else {
+            setLoader(true)
             addUser(inputdata).then(data=>{
 
                 if(data.status==="failed"){
                     console.log(data.message)
+                    setLoader(false)
                   setErr(data.message)
                 }else if(data.status==="success"){
                     toast.success("Registered Successfully");
                     // console.log('success')
                   setErr("")
+                  setLoader(false)
                   setInputData({
                     Name: "",
                     Email: "",
@@ -100,7 +103,7 @@ function UserRegister() {
 
                     <div className="login-signup">
                         <Link to='/user/login' ><span >Sign in</span></Link>
-                        <button className="save-details" type='submit'>Register</button>
+                        <button className="save-details" type='submit'>{loader?<div id="loder-of-the-button-of-the-login-submit"></div>:"Register"}</button>
                         
                     </div>
                 </form>

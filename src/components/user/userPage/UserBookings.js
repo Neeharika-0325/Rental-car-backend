@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import UserNav from "../../navbar/UserNav";
 import '../../styles/bookings.css';
 import '../../styles/styles.css';
-import {GetOrders} from '../../utils/ApiUtils'
+import {deleteCarOrder} from '../../utils/ApiUtils'
 import { Link, useNavigate } from "react-router-dom";
 import { StateContextsData } from "../../context/StateContext";
 import HomePage from "../../homePage/HomePage";
@@ -13,36 +13,39 @@ export default function UserBookings(){
    const TokenUser= JSON.parse(localStorage.getItem("token-user"))
     const userId=JSON.parse(localStorage.getItem("userId"))
     useEffect(()=>{
-        console.log(userId)
+        // console.log(userId)
+        // const url="https://car-rent-backend.onrender.com/orders/${userId}"
      fetch(`https://car-rent-backend.onrender.com/orders/${userId}`)
         .then(res=>{
-            console.log(res)
+            // console.log(res)
             return res.json()})
         .then(data=>{
-            console.log(data)
+            // console.log(data)
             return setBookData((data.data).reverse())})
+    
     },[])
     // console.log(Bookdata)
 
 
-    function deleteCarData(id){
-        console.log(id)
-        fetch(`https://car-rent-backend.onrender.com/${id}`, {
 
-            method: 'DELETE',
-            headers:{
-                "authorization":JSON.parse(localStorage.getItem("token-user"))
-            },
-        }).then(res => {
-            console.log(res)
-            if(res.status === 200){
-                return true
-            }
-            return false
-        })
+    // function deleteCarData(id){
+    //     // console.log(id)
+    //     fetch(`http://localhost:8080/orders/${id}`, {
+
+    //         method: 'DELETE',
+    //         headers:{
+    //             "authorization":JSON.parse(localStorage.getItem("token-user"))
+    //         },
+    //     }).then(res => {
+    //         // console.log(res)
+    //         if(res.status === 200){
+    //             return true
+    //         }
+    //         return false
+    //     })
    
-    }
-    console.log(Bookdata)
+    // }
+    // console.log(Bookdata)
   
     return(
         <>
@@ -101,7 +104,7 @@ export default function UserBookings(){
                             <Link to='/edit-payment'><button className="edit-sty" onClick={()=>setEditPaymentDetails(data)}>Edit</button></Link>
                         </div>
                         <div>
-                            <button className="cancel-sty" onClick={()=>deleteCarData(data._id)}>Cancel</button>
+                            <button className="cancel-sty" onClick={()=>deleteCarOrder(data._id)}>Cancel</button>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 
 const API_ADMIN="https://car-rent-backend.onrender.com"
-
+// const API_ADMIN="http://localhost:8080"
 
 function addAdmin(AdminData){
     console.log(`${API_ADMIN}/admin/register`)

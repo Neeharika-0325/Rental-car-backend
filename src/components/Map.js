@@ -10,7 +10,7 @@ function Map(props) {
   const [imageUrl, setMapImageUrl] = useState(null);
 
   const { origin, destination } = props;
-
+  console.log(headerData.MapImg)
   useEffect(() => {
     const loadMap = () => {
       setDirectionsService(new window.google.maps.DirectionsService());

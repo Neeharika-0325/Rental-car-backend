@@ -38,7 +38,7 @@ export default function EditPayment() {
 
     function editformsubmitFunc(e) {
         e.preventDefault();
-
+        // const url='https://car-rent-backend.onrender.com/orders/${EditPaymentDetails._id}'
         fetch(`https://car-rent-backend.onrender.com/orders/${EditPaymentDetails._id}`, {
 
             method: "PATCH",
