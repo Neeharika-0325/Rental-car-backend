@@ -13,6 +13,7 @@ function AdminLogin() {
         Password: ""
     });
     const [error, setError] = useState("")
+    const [loader, setLoader] =useState(false)
     const handleEmailChange = (e) => {
         setError("")
         setInputData({ ...inputdata, Email: e.target.value });
@@ -47,6 +48,7 @@ function AdminLogin() {
             toast.error("Password is too Long")
         }
         else {
+            setLoader(true)
             fetch("https://car-rent-backend.onrender.com/admin/login" ,{
 
             method:"POST",
@@ -62,6 +64,7 @@ function AdminLogin() {
               localStorage.setItem("Admin-Id" , JSON.stringify(res.adminId))
               navigate("/admin-page")
             }else if(res.status==="failed"){
+                setLoader(false)
                 setError(res.message)
             }
           })
@@ -80,7 +83,7 @@ function AdminLogin() {
 
                     <div className="login-signup">
                         <Link to='/admin/register' ><span >Create Account</span></Link>
-                        <button type='submit'className="save-details">Sign In</button>
+                        <button type='submit'className="save-details">{loader?<div id="loder-of-the-button-of-the-login-submit"></div>:"Sign In"}</button>
                     </div>
                 </form>
                 <ToastContainer
