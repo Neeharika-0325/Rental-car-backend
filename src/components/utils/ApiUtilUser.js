@@ -1,6 +1,6 @@
 
 const API_USER="https://car-rent-backend.onrender.com"
-
+// const API_USER="http://localhost:8080"
 
 function addUser(UserData){
     return fetch(`${API_USER}/user/register`, {

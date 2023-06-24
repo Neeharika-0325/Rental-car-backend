@@ -33,7 +33,7 @@ function PaymentCard() {
     startDate: headerData.startDate,
     endDate: headerData.endDate,
   };
-  console.log(headerData)
+  console.log(Object)
   let Distance, pricing, Subtotal, Tax, total;
   if (!isNaN(CarData.distance)) {
     Distance = parseInt(headerData.distance);
@@ -50,7 +50,7 @@ function PaymentCard() {
   }
   const Proceed = () => {
 
-
+    // const url="https://car-rent-backend.onrender.com/orders"
     fetch("https://car-rent-backend.onrender.com/orders", {
       method: "POST",
       headers: {

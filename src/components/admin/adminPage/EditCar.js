@@ -17,7 +17,7 @@ export default function EditCar() {
     function onSubmitEdit(e){
         e.preventDefault()
         const EditformData = new FormData(e.target)
-
+        // const url='https://car-rent-backend.onrender.com/cars/${edit._id}'
       fetch(`https://car-rent-backend.onrender.com/cars/${edit._id}` , {
         method:"PUT",
         headers:{

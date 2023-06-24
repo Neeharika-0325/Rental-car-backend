@@ -15,7 +15,7 @@ function AdminRegister() {
         Password: "",
         Confirm_Password: ""
     });
-    // const [err, setErr] =useState('')
+    const [loader,setLoader] = useState(false)
     const navigate = useNavigate();
     // useEffect(()=>{console.log(err)}
     // ,[err])
@@ -48,15 +48,17 @@ function AdminRegister() {
             toast.error("Password is not Matching")
         }
         else {
-            
+            setLoader(true)
             addAdmin(inputdata).then(data => {
                 console.log(data)
                 if (data.status === "failed") {
+                    setLoader(false)
                     console.log(data.message)
                     // setErr('User Already Exists')
                     setErr(data.message)
                     
                 } else if (data.status === "success") {
+                    setLoader(false)
                     toast.success("Registered Successfully");
                     setInputData({
                         Name: "",
@@ -94,7 +96,7 @@ function AdminRegister() {
 
                     <div className="login-signup">
                         <Link to='/admin/login' ><span >Sign In</span></Link>
-                        <button type='submit' className="save-details">Register</button>
+                        <button type='submit' className="save-details">{loader?<div id="loder-of-the-button-of-the-login-submit"></div> :"Register"}</button>
                     </div>
                 </form>
                 <ToastContainer
